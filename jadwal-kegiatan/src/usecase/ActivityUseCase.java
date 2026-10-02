@@ -42,8 +42,7 @@ public class ActivityUseCase {
             activity.changeTime(time);
         }
 
-        repository.update(activity);
-        return true;
+        return repository.update(activity);
     }
 
     public List<Activity> searchActivities(String keyword) {

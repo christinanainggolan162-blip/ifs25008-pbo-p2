@@ -36,8 +36,7 @@ public class ItemUseCase {
             item.changeQuantity(quantity);
         }
 
-        repository.update(item);
-        return true;
+        return repository.update(item);
     }
 
     public List<Item> searchItems(String keyword) {

@@ -33,6 +33,13 @@ public class ContactRepository implements IContactRepository {
     }
 
     @Override
-    public void update(Contact contact) {
+    public boolean update(Contact contact) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getId() == contact.getId()) {
+                data.set(i, contact);
+                return true;
+            }
+        }
+        return false;
     }
 }

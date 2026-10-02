@@ -1,39 +1,34 @@
 package adapter.repository;
 
 import domain.entity.Guest;
-import domain.repository.IGuestRepository; // <-- Import yang benar
+import domain.repository.IGuestRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class GuestRepository implements IGuestRepository {
-    private final List<Guest> database = new ArrayList<>();
-    private int idCounter = 1;
+    private final List<Guest> data = new ArrayList<>();
+    private int idCounter = 0;
 
     @Override
-    public Guest addGuest(String name, String purpose) {
-        Guest guest = new Guest(idCounter++, name, purpose);
-        database.add(guest);
+    public List<Guest> findAll() {
+        return new ArrayList<>(data);
+    }
+
+    @Override
+    public Optional<Guest> findById(int id) {
+        return data.stream().filter(g -> g.getId() == id).findFirst();
+    }
+
+    @Override
+    public Guest save(String name, String purpose) {
+        Guest guest = new Guest(++idCounter, name, purpose);
+        data.add(guest);
         return guest;
     }
 
     @Override
-    public List<Guest> getAllGuests() {
-        return database;
-    }
-
-    @Override
-    public List<Guest> searchGuests(String keyword) {
-        List<Guest> results = new ArrayList<>();
-        for (Guest guest : database) {
-            if (guest.getName().toLowerCase().contains(keyword.toLowerCase())) {
-                results.add(guest);
-            }
-        }
-        return results;
-    }
-
-    @Override
-    public boolean deleteGuest(int id) {
-        return database.removeIf(guest -> guest.getId() == id);
+    public boolean deleteById(int id) {
+        return data.removeIf(g -> g.getId() == id);
     }
 }

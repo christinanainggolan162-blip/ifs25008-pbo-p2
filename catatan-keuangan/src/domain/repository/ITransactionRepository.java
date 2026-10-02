@@ -1,14 +1,13 @@
 package domain.repository;
 
 import domain.entity.Transaction;
-import domain.entity.SortOption;
+import domain.entity.TransactionType;
 import java.util.List;
+import java.util.Optional;
 
 public interface ITransactionRepository {
-    void addTransaction(Transaction transaction);
-    List<Transaction> getAllTransactions();
-    Transaction getTransactionById(int id);
-    boolean deleteTransaction(int id);
-    List<Transaction> searchTransactions(String query);
-    List<Transaction> getSortedTransactions(SortOption sortOption);
+    List<Transaction> findAll();
+    Optional<Transaction> findById(int id);
+    Transaction save(String description, double amount, TransactionType type);
+    boolean deleteById(int id);
 }

@@ -42,8 +42,7 @@ public class ContactUseCase {
             contact.changeEmail(email);
         }
 
-        repository.update(contact);
-        return true;
+        return repository.update(contact);
     }
 
     public List<Contact> searchContacts(String keyword) {

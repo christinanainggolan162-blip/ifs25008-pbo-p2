@@ -9,5 +9,5 @@ public interface IContactRepository {
     Optional<Contact> findById(int id);
     Contact save(String name, String phone, String email);
     boolean deleteById(int id);
-    void update(Contact contact);
+    boolean update(Contact contact);
 }

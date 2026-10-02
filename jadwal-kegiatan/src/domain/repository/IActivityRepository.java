@@ -9,5 +9,5 @@ public interface IActivityRepository {
     Optional<Activity> findById(int id);
     Activity save(String title, String day, String time);
     boolean deleteById(int id);
-    void update(Activity activity);
+    boolean update(Activity activity);
 }

@@ -1,7 +1,7 @@
 package usecase;
 
 import domain.entity.Guest;
-import domain.repository.IGuestRepository; // <-- Pastikan baris ini ada
+import domain.repository.IGuestRepository;
 import java.util.List;
 
 public class GuestUseCase {
@@ -11,19 +11,22 @@ public class GuestUseCase {
         this.repository = repository;
     }
 
-    public Guest addGuest(String name, String purpose) {
-        return repository.addGuest(name, purpose);
+    public List<Guest> getAllGuests() {
+        return repository.findAll();
     }
 
-    public List<Guest> getAllGuests() {
-        return repository.getAllGuests();
+    public Guest addGuest(String name, String purpose) {
+        return repository.save(name, purpose);
     }
 
     public List<Guest> searchGuests(String keyword) {
-        return repository.searchGuests(keyword);
+        String lowerKeyword = keyword.toLowerCase();
+        return repository.findAll().stream()
+                .filter(g -> g.getName().toLowerCase().contains(lowerKeyword))
+                .toList();
     }
 
     public boolean deleteGuest(int id) {
-        return repository.deleteGuest(id);
+        return repository.deleteById(id);
     }
 }

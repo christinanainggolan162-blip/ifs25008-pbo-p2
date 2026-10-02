@@ -33,6 +33,13 @@ public class ActivityRepository implements IActivityRepository {
     }
 
     @Override
-    public void update(Activity activity) {
+    public boolean update(Activity activity) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getId() == activity.getId()) {
+                data.set(i, activity);
+                return true;
+            }
+        }
+        return false;
     }
 }

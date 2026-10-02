@@ -5,18 +5,27 @@ import java.util.List;
 
 public class GuestPresenter {
 
-    public GuestPresenter() {
+    private String format(Guest guest) {
+        return guest.getId() + " | " + guest.getName() + " | " + guest.getPurpose();
+    }
+
+    private void printList(List<Guest> guests, String header, String emptyMessage) {
+        System.out.println(header);
+        if (guests.isEmpty()) {
+            System.out.println(emptyMessage);
+        } else {
+            for (Guest guest : guests) {
+                System.out.println(format(guest));
+            }
+        }
     }
 
     public void showGuests(List<Guest> guests) {
-        System.out.println("Daftar Tamu:");
-        if (guests == null || guests.isEmpty()) {
-            System.out.println("- Data tamu belum tersedia!");
-        } else {
-            for (Guest guest : guests) {
-                System.out.println(guest.getId() + " | " + guest.getName() + " | " + guest.getPurpose());
-            }
-        }
+        printList(guests, "Daftar Tamu:", "- Data tamu belum tersedia!");
+    }
+
+    public void showSearchResults(String keyword, List<Guest> results) {
+        printList(results, "Hasil Pencarian: \"" + keyword + "\"", "- Tamu tidak ditemukan!");
     }
 
     public void showMenu() {
@@ -28,18 +37,6 @@ public class GuestPresenter {
     }
 
     public void showAddSuccess(Guest guest) {
-        System.out.println("Berhasil mendaftarkan tamu: " + guest.getId() + " | " + guest.getName() + " | " + guest.getPurpose());
-    }
-
-    // --- UBAH METHOD INI ---
-    public void showSearchResults(String keyword, List<Guest> results) {
-        System.out.println("Hasil Pencarian: \"" + keyword + "\"");
-        if (results == null || results.isEmpty()) {
-            System.out.println("- Tamu tidak ditemukan!");
-        } else {
-            for (Guest guest : results) {
-                System.out.println(guest.getId() + " | " + guest.getName() + " | " + guest.getPurpose());
-            }
-        }
+        System.out.println("Berhasil mendaftarkan tamu: " + format(guest));
     }
 }

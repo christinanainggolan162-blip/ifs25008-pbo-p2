@@ -33,6 +33,13 @@ public class ItemRepository implements IItemRepository {
     }
 
     @Override
-    public void update(Item item) {
+    public boolean update(Item item) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).getId() == item.getId()) {
+                data.set(i, item);
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -81,14 +81,7 @@ public class FinanceView {
                 presenter.showError("[!] Jumlah tidak valid!");
                 return;
             }
-            useCase.addTransaction(desc, amount, type);
-
-            var transactions = useCase.getAllTransactions();
-            var lastTx = transactions.get(transactions.size() - 1);
-            
-            // Hanya cetak konfirmasi berhasil tambah
-            System.out.print("Berhasil menambah transaksi: ");
-            presenter.showSingleTransaction(lastTx);
+            presenter.showAddSuccess(useCase.addTransaction(desc, amount, type));
 
         } catch (NumberFormatException e) {
             presenter.showError("[!] Jumlah tidak valid!");
